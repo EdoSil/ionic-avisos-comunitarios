@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Avisos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+<ion-button expand="block" routerLink="/crear-aviso">
+    Crear Aviso
+</ion-button>
+
+
+  <app-lista-avisos
+    [avisos]="avisos"
+    (eliminarAviso)="onEliminarAviso($event)">
+  </app-lista-avisos>
+</ion-content>

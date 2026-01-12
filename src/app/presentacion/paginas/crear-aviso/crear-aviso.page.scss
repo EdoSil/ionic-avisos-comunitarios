@@ -1,0 +1,19 @@
+/* Fila de botones */
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+/* Contenedor de imagen */
+.imagen-container {
+  margin-top: 24px;
+  border: 2px solid #000;
+  padding: 8px;
+}
+
+/* Imagen */
+.imagen-preview {
+  width: 100%;
+  border-radius: 4px;
+}

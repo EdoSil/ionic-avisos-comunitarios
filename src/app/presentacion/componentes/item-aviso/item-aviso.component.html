@@ -1,0 +1,37 @@
+<ion-item>
+
+  <!-- Contenido principal del aviso -->
+  <ion-label>
+    <h2>{{ aviso.titulo }}</h2>
+
+    <p>{{ aviso.descripcion }}</p>
+
+    <!-- Fecha formateada con el pipe -->
+    <p>{{ aviso.fechaCreacion | fecha }}</p>
+
+    <!-- Imagen asociada al aviso (si existe) -->
+    <img
+      *ngIf="aviso.imagen"
+      [src]="aviso.imagen"
+      alt="Imagen del aviso"
+      style="width: 100%; margin-top: 8px; border-radius: 6px;" />
+  </ion-label>
+
+  <!-- Botón de eliminar FUERA del ion-label -->
+  <!-- slot="end" es CLAVE para que Android detecte el touch -->
+  <ion-button
+    slot="end"
+    color="danger"
+    size="small"
+    (click)="confirmarEliminacion()">
+    
+   <ion-icon
+      [icon]="trashIcon"
+      slot="icon-only">
+   </ion-icon>
+
+    
+  </ion-button>
+
+</ion-item>
+

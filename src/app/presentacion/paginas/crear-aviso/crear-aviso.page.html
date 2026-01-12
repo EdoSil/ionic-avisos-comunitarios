@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar>
+
+   <!-- Flecha para volver atrás -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/lista-avisos"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Crear Aviso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="formularioAviso" (ngSubmit)="enviar()">
+
+    <!-- TÍTULO -->
+    <ion-input
+      label="Título"
+      labelPlacement="floating"
+      formControlName="titulo">
+    </ion-input>
+
+    <div *ngIf="formularioAviso.get('titulo')?.touched && formularioAviso.get('titulo')?.invalid">
+      <p *ngIf="formularioAviso.get('titulo')?.errors?.['required']">
+        El título es obligatorio
+      </p>
+      <p *ngIf="formularioAviso.get('titulo')?.errors?.['minlength']">
+        El título debe tener al menos 5 caracteres
+      </p>
+    </div>
+
+    <!-- DESCRIPCIÓN -->
+    <ion-textarea
+      label="Descripción"
+      labelPlacement="floating"
+      formControlName="descripcion">
+    </ion-textarea>
+
+    <div *ngIf="formularioAviso.get('descripcion')?.touched && formularioAviso.get('descripcion')?.invalid">
+      <p *ngIf="formularioAviso.get('descripcion')?.errors?.['required']">
+        La descripción es obligatoria
+      </p>
+      <p *ngIf="formularioAviso.get('descripcion')?.errors?.['minlength']">
+        La descripción debe tener al menos 20 caracteres
+      </p>
+    </div>
+
+
+<!-- ACCIONES -->
+<div class="acciones">
+
+  <ion-button
+    size="small"
+    color="primary"
+    type="submit">
+    <ion-icon
+      [icon]="saveIcon"
+      slot="start">
+    </ion-icon>
+    Guardar
+  </ion-button>
+
+  <ion-button
+    size="small"
+    type="button"
+    (click)="tomarFoto()">
+     <ion-icon
+      [icon]="cameraIcon"
+      slot="start">
+    </ion-icon>
+    Tomar foto
+  </ion-button>
+
+</div>
+
+<!-- CONTENEDOR DE IMAGEN -->
+<div class="imagen-container" *ngIf="fotoBase64">
+
+  <img
+    [src]="fotoBase64"
+    alt="Foto capturada"
+    class="imagen-preview" />
+
+</div>
+
+  </form>
+
+</ion-content>

@@ -1,14 +1,24 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
-import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
-
-import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
+import { provideRouter } from '@angular/router';
+import { routes } from './app/app.routes';
+import { APP_INITIALIZER } from '@angular/core';
+import { AvisoService } from './app/negocio/servicios/aviso.service';
+import { provideIonicAngular } from '@ionic/angular/standalone';
+
+function initApp(avisoService: AvisoService) {
+  return () => avisoService.cargarAvisos();
+}
 
 bootstrapApplication(AppComponent, {
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideIonicAngular(),
-    provideRouter(routes, withPreloading(PreloadAllModules)),
-  ],
+    provideIonicAngular(),   // 🔥 ESTO RESTAURA EL LOOK IONIC
+    provideRouter(routes),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      deps: [AvisoService],
+      multi: true
+    }
+  ]
 });

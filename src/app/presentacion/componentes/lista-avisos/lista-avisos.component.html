@@ -1,0 +1,7 @@
+<ion-list>
+  <app-item-aviso
+    *ngFor="let aviso of avisos"
+    [aviso]="aviso"
+    (eliminar)="onEliminar($event)">
+  </app-item-aviso>
+</ion-list>
